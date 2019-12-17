@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!-- release v5.0.8, copyright 2014 - 2019 Kartik Visweswaran -->
+<!--suppress JSUnresolvedLibraryURL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Deeplabv3p</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'bootstrap-fileinput/css/fileinput.css' %}" media="all" rel="stylesheet" type="text/css"/>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{% static '/js/csrf.js' %}"></script>
+    <!-- 如果你想在上传之前修改图片大小需要加入canvas-to-blob.min.js  它必须在fileinput.min.js之前引入 -->
+    {#    <script src="{% static 'bootstrap-fileinput/js/plugins/canvas-to-blob.js' %}" type="text/javascript"></script>#}
+    <!-- 如果你想在最初的预览中排序/重新排列需要引入sortable.min.js  它必须在fileinput.min.js之前引入 -->
+    {#    <script src="path/to/js/plugins/sortable.min.js" type="text/javascript"></script>#}
+    <!-- 如果你想在HTML文件预览中净化HTML内容则要引入purify.min.js is   它必须在fileinput.min.js之前引入 -->
+    <script src="{% static 'bootstrap-fileinput/js/plugins/purify.min.js' %}" type="text/javascript"></script>
+    <!-- 主要的 fileinput 插件库 -->
+    <script src="{% static 'bootstrap-fileinput/js/fileinput.js' %}"></script>
+    <!-- 如果你想在放大的模态页面中查看文件详细信息需要引入bootstrap.js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- 可选，如果你需要像font awesome 这样的主题，就像下面的代码一样引入它 -->
+    <script src="{% static 'bootstrap-fileinput/js/locales/fa.js' %}"></script>
+    <!-- 可选，如果你需要转换语言或翻译，就包含这个库 -->
+    <script src="{% static 'bootstrap-fileinput/js/locales/zh.js' %}"></script>
+</head>
+<body>
+<div class="container my-4">
+    <h1>Deep Learn
+        <small><i class="glyphicon glyphicon-download"></i>deeplabv3p</small>
+    </h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <form enctype="multipart/form-data">
+{#                {% csrf_token %}#}
+                <div class="file-loading">
+                    <input id="kv-explorer" name='explorer' type="file" multiple>
+                </div>
+                <br>
+            </form>
+        </div>
+        <div class="col-md-6">
+
+            <!-- select -->
+            <div class="form-group">
+                <label>Model</label>
+                <select class="form-control" id="select_id">
+                    <option value="0">xception_coco_voctrainaug</option>
+                    <option value="1">xception_coco_voctrainval</option>
+                    <option value="2">mobilenetv2_coco_voctrainauga</option>
+                    <option value="3">mobilenetv2_coco_voctrainval</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Box Comment -->
+            <img id='img' src=""/>
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+            <!-- Box Comment -->
+            <div class="card card-widget">
+                <div class="card-header">
+                    <div class="user-block">
+                        <img class="img-circle" src="{% static '/dist/img/user1-128x128.jpg' %}" alt="User Image">
+                        <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
+                        <span class="description">Shared publicly - 7:30 PM Today</span>
+                    </div>
+                    <!-- /.user-block -->
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Mark as read">
+                            <i class="far fa-circle"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <!-- post text -->
+                    <p>Far far away, behind the word mountains, far from the
+                        countries Vokalia and Consonantia, there live the blind
+                        texts. Separated they live in Bookmarksgrove right at</p>
+
+                    <p>the coast of the Semantics, a large language ocean.
+                        A small river named Duden flows by their place and supplies
+                        it with the necessary regelialia. It is a paradisematic
+                        country, in which roasted parts of sentences fly into
+                        your mouth.</p>
+
+                    <!-- Attachment -->
+                    <div class="attachment-block clearfix">
+                        <img class="attachment-img" src="{% static '/dist/img/photo1.png' %}" alt="Attachment Image">
+
+                        <div class="attachment-pushed">
+                            <h4 class="attachment-heading"><a href="http://www.lipsum.com/">Lorem ipsum text
+                                generator</a></h4>
+
+                            <div class="attachment-text">
+                                Description about the attachment can be placed here.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a
+                                    href="#">more</a>
+                            </div>
+                            <!-- /.attachment-text -->
+                        </div>
+                        <!-- /.attachment-pushed -->
+                    </div>
+                    <!-- /.attachment-block -->
+
+                    <!-- Social sharing buttons -->
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                    <span class="float-right text-muted">45 likes - 2 comments</span>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer card-comments">
+                    <div class="card-comment">
+                        <!-- User image -->
+                        <img class="img-circle img-sm" src="{% static '/dist/img/user3-128x128.jpg' %}"
+                             alt="User Image">
+
+                        <div class="comment-text">
+                    <span class="username">
+                      Maria Gonzales
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                            It is a long established fact that a reader will be distracted
+                            by the readable content of a page when looking at its layout.
+                        </div>
+                        <!-- /.comment-text -->
+                    </div>
+                    <!-- /.card-comment -->
+                    <div class="card-comment">
+                        <!-- User image -->
+                        <img class="img-circle img-sm" src="{% static '/dist/img/user5-128x128.jpg' %}"
+                             alt="User Image">
+
+                        <div class="comment-text">
+                    <span class="username">
+                      Nora Havisham
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                            The point of using Lorem Ipsum is that it hrs a morer-less
+                            normal distribution of letters, as opposed to using
+                            'Content here, content here', making it look like readable English.
+                        </div>
+                        <!-- /.comment-text -->
+                    </div>
+                    <!-- /.card-comment -->
+                </div>
+                <!-- /.card-footer -->
+                <div class="card-footer">
+                    <form action="#" method="post">
+                        <img class="img-fluid img-circle img-sm" src="{% static '/dist/img/user4-128x128.jpg' %}"
+                             alt="Alt Text">
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push">
+                            <input type="text" class="form-control form-control-sm"
+                                   placeholder="Press enter to post comment">
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+<div class="card-body">
+</div>
+<hr>
+</div>
+
+
+</body>
+<script>
+    var token = $('input[name=csrfmiddlewaretoken]').val();
+    $(document).ready(function () {
+
+        $("#kv-explorer").fileinput({
+            'theme': 'explorer-fas',
+            'uploadUrl': '/upload/',
+            'data': {'select': $("#select_id").val()},
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+        }).on('filepreupload', function (event, data, previewId, index) {
+
+            $.ajax({
+                url: '/upload/',
+                method: 'post',
+                dataType: 'json',
+                data: {'select': $("#select_id").val(),csrfmiddlewaretoken: token},
+                success: function (data) {
+
+                }
+            });
+            alert('正在处理，请稍等！！');
+        }).on('fileuploaded', function (event, data) {//异步上传成功结果处理
+            $("#img").attr('src', data.response['urls']);
+        });
+
+    });
+</script>
+</html>
